@@ -1,0 +1,115 @@
+######################## Spring Profile 切换环境 ########################
+## 切换日志环境、数据源等配置
+#  默认的profile为dev，其他环境通过指定启动参数使用不同的profile，比如：
+#   测试环境：java -jar my-spring-boot.jar --spring.profiles.active=test
+#   生产环境：java -jar my -spring-boot.jar --spring.profiles.active=prod
+#  注意 "---" 表示：一组配置
+# 开发环境配置
+spring:
+# profiles: dev
+ #redis配置
+ redis:
+  #host: 113.106.202.51
+  #port: 6379
+  password:
+  database: 3
+  timeout: 5000
+  #redis集群配置
+  cluster:
+   nodes: 113.106.202.51:6379,113.106.202.50:9379,113.106.202.53:9379
+   maxRedirects: 3
+  #redis集群配置
+  sentinel:
+    #     # comma-separated list of host:port pairs  哨兵的配置列表
+    nodes: 113.106.202.51:26379,113.106.202.50:29379,113.106.202.54:29379
+    #     # name of Redis server  哨兵监听的Redis server的名称
+    master: mymaster
+  pool:
+    max-wait: -1
+    min-idle: 0
+    max-active: 200
+    max-idle: 20
+#redis session共享
+ session:
+   store-type: redis
+#自动重启默认开发时开启
+ devtools:
+  restart:
+   enabled: true
+  livereload:
+   enabled: true
+ thymeleaf:
+   cache: false
+
+ datasource:
+   druid:
+     url: jdbc:mysql://113.106.202.51:2222/demo?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&createDatabaseIfNotExist=true
+     username: root
+     password: gt123456
+     # 下面为连接池的补充设置，应用到上面所有数据源中
+     # 初始化大小，最小，最大
+     initial-size: 10
+     max-active: 50
+     # 配置获取连接等待超时的时间
+     maxWait: 60000
+     # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 五分钟
+     timeBetweenEvictionRunsMillis: 300000
+     # 配置一个连接在池中最小生存的时间，单位是毫秒
+     minEvictableIdleTimeMillis: 30000
+     validationQuery: select 1
+     testWhileIdle: true
+     testOnBorrow: true
+     testOnReturn: true
+     # 是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭。
+     # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+     #filters: stat,wall,slf4j
+     # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+     # 合并多个DruidDataSource的监控数据
+     stat-view-servlet:
+#      IP白(allow)/黑(deny)名单 (存在共同时，deny优先于allow) : 如果满足deny的话提示:Sorry, you are not permitted to view this page.
+      allow: 127.0.0.1,192.168.2.100
+      login-username: admin
+      login-password: admin
+      reset-enable: false
+      url-pattern: /druid/*
+      # Spring监控配置，说明请参考Druid Github Wiki，配置_Druid和Spring关联监控配置
+      # 如果spring.datasource.druid.aop-patterns要代理的类没有定义interface请设置spring.aop.proxy-target-class=true
+      # Spring监控AOP切入点，如x.y.z.service.*,配置多个英文逗号分隔
+     aop-patterns: com.gt.eat.*.service.*,com.gt.eat.*.dao.*
+     #批量新增修改
+     filter:
+      wall:
+       config:
+        multi-statement-allow: true
+
+######################## 开发环境配置 ########################
+# 是否开启Swagger接口展示
+swagger:
+  show: true
+#JedisUtil 用到的配置
+redis:
+ host: 113.106.202.51
+ port: 6379
+ password: gt@123456
+ database: 3
+
+
+### 设置 Redis session 共享
+redisSession:
+ domainName: .yifriend.net
+ cookiePath: /
+# cookieName: JSESSIONID
+ cookieName: WXMPJSESSIONID
+
+web:
+ #域名
+ domain: http://eat.yifriend.net/
+
+
+canyin:
+ redisNamePrefix:
+  key: erp_canyin_
+ socket:
+  url: https://socket.deeptel.com.cn
+

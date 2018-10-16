@@ -1,0 +1,96 @@
+####### 使用YML语法形式配置，注意分号后面需要加空格
+####### 例如：port: 8088
+######################## 容器 ########################
+server:
+ port: 8089
+ context-path: /
+
+######################## Spring 全局设置 ########################
+spring:
+ application:
+  name: demo
+ profiles:
+  active: dev
+  # SpringMvc 配置
+ mvc:
+  view:
+   prefix: /html/
+   suffix: .html
+# security:
+#  jwt:
+#    tokenExpirationTime: 15 # Number of minutes
+#    refreshTokenExpTime: 60 # Minutes
+#    tokenIssuer: zhangmz
+#    tokenSigningKey: xm8EV6Hy5RMFK4EEACIDAwQus
+ http:
+  encoding:
+    force: true
+    charset: UTF-8
+    enabled: true
+  multipart:
+   maxFileSize: 100Mb
+   maxRequestSize: 100Mb
+# thymeleaf:
+#  mode: LEGACYHTML5
+#  suffix: .jsp
+
+  #自动重启默认关闭
+ devtools:
+  restart:
+   enabled: true
+ thymeleaf:
+   cache: false
+ jackson:
+ # 定义Json 输出不为null 的字段
+   default-property-inclusion: non_null
+
+
+######################## 日志 ########################
+#logging:
+# 注：二者不能同时使用，如若同时使用，则只有logging.file生效
+# path: logs #日志文件目录
+# 默认情况下，日志文件的大小达到10MB时会切分一次，产生新的日志文件，默认级别为：ERROR、WARN、INFO
+# file: logs/mall.log #日志文件名
+# mybatis 路径
+
+#mybatis:
+# mapperLocations: classpath*:mapper/*.xml
+# type-aliases-package: com.gt.mall.entity
+
+#mybatis
+mybatis-plus:
+ mapper-locations: classpath:mapper/**/*.xml
+ type-aliases-package: com.gt.eat.entity
+ global-config:
+  #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+  id-type: 0
+  #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+  field-strategy: 2
+  #驼峰下划线转换
+  db-column-underline: true
+  #刷新mapper 调试神器  发布正式环境时，请关闭
+  refresh-mapper: true
+  #数据库大写下划线转换
+  capital-mode: true
+  #序列接口实现类配置
+  #key-generator: com.baomidou.springboot.xxx
+  #逻辑删除配置
+  #logic-delete-value: 0
+  #logic-not-delete-value: 1
+  #自定义填充策略接口实现
+  #meta-object-handler: com.baomidou.springboot.xxx
+  #自定义SQL注入器
+  #sql-injector: com.baomidou.springboot.xxx
+ configuration:
+  map-underscore-to-camel-case: true
+  cache-enabled: false
+
+
+
+
+
+######################## Logback ########################
+
+# debug: true
+
+

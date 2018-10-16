@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gt.dao.mapper.MemberDAO">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.gt.entity.Member">
+		<id column="id" property="id" />
+		<result column="nick_name" property="nickName" />
+		<result column="avatar_url" property="avatarUrl" />
+		<result column="gender" property="gender" />
+		<result column="city" property="city" />
+		<result column="province" property="province" />
+		<result column="openid" property="openid" />
+		<result column="phone" property="phone" />
+		<result column="source" property="source" />
+		<result column="status" property="status" />
+		<result column="grade" property="grade" />
+		<result column="creat_time" property="creatTime" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, nick_name , avatar_url , gender, city, province, openid, phone, source, status, grade, creat_time
+    </sql>
+	<select id="selectByOpenId" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		FROM member
+		WHERE openid = #{openId} AND status = 1
+		ORDER BY id DESC
+		LIMIT 0,1
+
+	</select>
+
+</mapper>

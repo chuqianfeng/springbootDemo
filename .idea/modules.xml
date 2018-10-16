@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/demo.iml" filepath="$PROJECT_DIR$/demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo-common/demo-common.iml" filepath="$PROJECT_DIR$/demo-common/demo-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo-controller/demo-controller.iml" filepath="$PROJECT_DIR$/demo-controller/demo-controller.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo-dao/demo-dao.iml" filepath="$PROJECT_DIR$/demo-dao/demo-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo-entity/demo-entity.iml" filepath="$PROJECT_DIR$/demo-entity/demo-entity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo-generator/demo-generator.iml" filepath="$PROJECT_DIR$/demo-generator/demo-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo-service/demo-service.iml" filepath="$PROJECT_DIR$/demo-service/demo-service.iml" />
+    </modules>
+  </component>
+</project>
